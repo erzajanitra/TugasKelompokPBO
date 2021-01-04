@@ -1,12 +1,16 @@
 package id.ac.its.erza153.fp;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 public class Menu {
 
 	public static void main(String[] args) {
 		
-		String[] options1 = {"Play Game", "Quit Game"} ;
+				
+		String[] options1 = {"Play Game", "Quit Game","Credits"} ;
     	// JOptionPane untuk menu screen
 		int input1 = JOptionPane.showOptionDialog(null, 
 				"Welcome to Puzzle Game!", 
@@ -57,8 +61,15 @@ public class Menu {
 			
 			//}
 			
+		//credits game
+		else if(input1==2) {
+			PuzzleEx label=new PuzzleEx(num);
+			label.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			label.setSize(50,30);
+			label.setVisible(true);
 		}
 
 	}
 
+}
 }

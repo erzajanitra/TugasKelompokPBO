@@ -25,13 +25,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 
 
 public class PuzzleEx extends JFrame{
 	private JPanel panel;
+	private final JLabel label;
     private BufferedImage source;
     private BufferedImage resized;    
     private Image image;
@@ -47,14 +50,21 @@ public class PuzzleEx extends JFrame{
     private int DESIRED_WIDTH=450 ;
     
     
-    //constructor PuzzleEx
+   //constructor PuzzleEx
     //nilai variable NUMBER_OF_BUTTONS berdasarkan level yang dipilih
     public PuzzleEx(int NUMBER_OF_BUTTONS) {
-    	this.NUMBER_OF_BUTTONS=NUMBER_OF_BUTTONS;
+    
+    	this.label = new JLabel("Credits");
+   		label.setText("Kirana Zea S.M. 05111940000081\nErza Janitradevi N 05111940000153\nRayhan Daffa A 051119400000227");
+ 		label.setHorizontalTextPosition(SwingConstants.CENTER);
+ 		label.setVerticalTextPosition(SwingConstants.CENTER);
+		this.NUMBER_OF_BUTTONS=NUMBER_OF_BUTTONS;
     	
-        initUI();
-    }
+		initUI();
+        
+     }
 
+   
     private void initUI() {
     	
     	int side= (int) Math.sqrt(NUMBER_OF_BUTTONS);
