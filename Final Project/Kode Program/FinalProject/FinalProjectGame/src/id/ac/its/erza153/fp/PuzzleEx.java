@@ -36,8 +36,8 @@ public class PuzzleEx extends JFrame{
     private BufferedImage resized;    
     private Image image;
     private MyButton lastButton;
-    private int width, height;    
-    
+    private int width, height;   
+     
     private List<MyButton> buttons;
     private List<Point> solution;
 
@@ -45,6 +45,7 @@ public class PuzzleEx extends JFrame{
     private int NUMBER_OF_BUTTONS ;
     //ukuran window puzzle
     private int DESIRED_WIDTH=450 ;
+    
     
     //constructor PuzzleEx
     //nilai variable NUMBER_OF_BUTTONS berdasarkan level yang dipilih
@@ -58,6 +59,7 @@ public class PuzzleEx extends JFrame{
     	
     	int side= (int) Math.sqrt(NUMBER_OF_BUTTONS);
         solution = new ArrayList<>();
+    
         
         //jumlah kotak
         for(int i=0;i<side;i++) {
@@ -132,7 +134,8 @@ public class PuzzleEx extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+    	}
+    
 
     private int getNewHeight(int w, int h) {
 
@@ -156,19 +159,22 @@ public class PuzzleEx extends JFrame{
         BufferedImage resizedImage = new BufferedImage(width, height, type);
         Graphics2D g = resizedImage.createGraphics();
         g.drawImage(originalImage, 0, 0, width, height, null);
+                 	
         g.dispose();
 
         return resizedImage;
     }
     
     private class ClickAction extends AbstractAction {
-
+    	
+    	
         @Override
         public void actionPerformed(ActionEvent e) {
 
             checkButton(e);
             checkSolution();
         }
+    	
 
         private void checkButton(ActionEvent e) {
 
@@ -205,6 +211,7 @@ public class PuzzleEx extends JFrame{
         }
     }
     
+    
     //checkSolution dengan membandingkan urutan list button dengan potongan puzzle pada panel
     private void checkSolution() {
 
@@ -225,37 +232,7 @@ public class PuzzleEx extends JFrame{
         return ls1.toString().contentEquals(ls2.toString());
     }
 
-    public static void main(String[] args) {
-
-        EventQueue.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-            	
-            	String[] options1 = {"Easy", "Medium", "Hard"} ;
-        		
-        		// JOptionPane untuk memilih level
-        		int input1 = JOptionPane.showOptionDialog(null, 
-        				"Choose Level", 
-        				"Puzzle", 
-        				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options1, options1[0]) ;
-        		
-        		//set levelnya
-        		//easy
-        		int num=9;
-        		//medium
-        		if(input1==1) {
-        			num=16;
-        		}
-        		//hard
-        		else if(input1==2) {
-        			num=25;
-        		}
-                PuzzleEx puzzle = new PuzzleEx(num);
-                puzzle.setVisible(true);
-            }
-        });
-    }
+    
 }
 
 
