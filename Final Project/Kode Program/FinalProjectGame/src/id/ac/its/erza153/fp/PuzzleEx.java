@@ -50,7 +50,15 @@ public class PuzzleEx extends JFrame{
     private int DESIRED_WIDTH=450 ;
     
     
-   //constructor PuzzleEx
+   private int getNewHeight(int w, int h) {
+	
+	    double ratio = DESIRED_WIDTH / (double) w;
+	    int newHeight = (int) (h * ratio);
+	    return newHeight;
+	}
+
+
+	//constructor PuzzleEx
     //nilai variable NUMBER_OF_BUTTONS berdasarkan level yang dipilih
     public PuzzleEx(int NUMBER_OF_BUTTONS) {
     
@@ -58,6 +66,7 @@ public class PuzzleEx extends JFrame{
    		label.setText("Kirana Zea S.M. 05111940000081\nErza Janitradevi N 05111940000153\nRayhan Daffa A 051119400000227");
  		label.setHorizontalTextPosition(SwingConstants.CENTER);
  		label.setVerticalTextPosition(SwingConstants.CENTER);
+ 		label.setVisible(true);
 		this.NUMBER_OF_BUTTONS=NUMBER_OF_BUTTONS;
     	
 		initUI();
@@ -147,18 +156,10 @@ public class PuzzleEx extends JFrame{
     	}
     
 
-    private int getNewHeight(int w, int h) {
-
-        double ratio = DESIRED_WIDTH / (double) w;
-        int newHeight = (int) (h * ratio);
-        return newHeight;
-    }
-    
     //load image
     private BufferedImage loadImage() throws IOException {
 
-        BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/photo.jpg"));
-
+        BufferedImage bimg = ImageIO.read(new File("C:\\Users\\ASUS\\Downloads\\FinalProjectGame\\mickeymouse.jpg"));
         return bimg;
     }
     
