@@ -3,6 +3,9 @@ package id.ac.its.erza153.fp;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -33,6 +36,7 @@ import javax.swing.SwingConstants;
 
 
 public class PuzzleEx extends JFrame{
+	public static final double UPDATES_PER_SECOND = 0;
 	private JPanel panel;
 	private final JLabel label;
     private BufferedImage source;
@@ -48,27 +52,21 @@ public class PuzzleEx extends JFrame{
     private int NUMBER_OF_BUTTONS ;
     //ukuran window puzzle
     private int DESIRED_WIDTH=450 ;
+    //gameTime
+    private Timer gameTimer;
+    //score
+    private int score;
+    //apakah game berjalan
+    private boolean inGame;
+   
     
-    
-   private int getNewHeight(int w, int h) {
-	
-	    double ratio = DESIRED_WIDTH / (double) w;
-	    int newHeight = (int) (h * ratio);
-	    return newHeight;
-	}
-
-
-	//constructor PuzzleEx
+   //constructor PuzzleEx
     //nilai variable NUMBER_OF_BUTTONS berdasarkan level yang dipilih
     public PuzzleEx(int NUMBER_OF_BUTTONS) {
     
-    	this.label = new JLabel("Credits");
-   		label.setText("Kirana Zea S.M. 05111940000081\nErza Janitradevi N 05111940000153\nRayhan Daffa A 051119400000227");
- 		label.setHorizontalTextPosition(SwingConstants.CENTER);
- 		label.setVerticalTextPosition(SwingConstants.CENTER);
- 		label.setVisible(true);
 		this.NUMBER_OF_BUTTONS=NUMBER_OF_BUTTONS;
-    	
+		this.label = new JLabel();
+
 		initUI();
         
      }
@@ -76,6 +74,7 @@ public class PuzzleEx extends JFrame{
    
     private void initUI() {
     	
+    	inGame=true;
     	int side= (int) Math.sqrt(NUMBER_OF_BUTTONS);
         solution = new ArrayList<>();
     
@@ -153,13 +152,25 @@ public class PuzzleEx extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //waktu game
+        gameTimer=new Timer(120,this::lose);
+     
     	}
     
 
+    private int getNewHeight(int w, int h) {
+
+        double ratio = DESIRED_WIDTH / (double) w;
+        int newHeight = (int) (h * ratio);
+        return newHeight;
+    }
+    
     //load image
     private BufferedImage loadImage() throws IOException {
 
-        BufferedImage bimg = ImageIO.read(new File("C:\\Users\\ASUS\\Downloads\\FinalProjectGame\\mickeymouse.jpg"));
+        BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/photo.jpg"));
+
         return bimg;
     }
     
@@ -176,18 +187,27 @@ public class PuzzleEx extends JFrame{
         return resizedImage;
     }
     
-    private class ClickAction extends AbstractAction {
-    	
-    	
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            checkButton(e);
-            checkSolution();
+    public void paintComponent(Graphics g) {
+    	 super.paintComponents(g);
+    	 if(inGame) {
+    		 initUI();
+    		 
+    	 }
+    	 else {
+    		 lose(g);
+    	 }
+    		 
+    }
+   
+      public void actionPerformed(ActionEvent e) {
+        	inGame=true;
+        	checkButton(e);
+        	checkSolution();
+        	
         }
     	
-
-        private void checkButton(ActionEvent e) {
+    
+      private void checkButton(ActionEvent e) {
 
             int lidx = 0;
             
@@ -207,8 +227,8 @@ public class PuzzleEx extends JFrame{
             }
         }
 
-        //memetakan list button ke potongan puzzle pada panel
-        private void updateButtons() {
+       //memetakan list button ke potongan puzzle pada panel
+       private void updateButtons() {
 
             panel.removeAll();
 
@@ -220,7 +240,7 @@ public class PuzzleEx extends JFrame{
             //jika ada posisi puzzle yg berubah
             panel.validate();
         }
-    }
+    
     
     
     //checkSolution dengan membandingkan urutan list button dengan potongan puzzle pada panel
@@ -233,15 +253,51 @@ public class PuzzleEx extends JFrame{
         }
 
         if (compareList(solution, current)) {
+        	applyToScore(gameTimer.asSeconds()*100);
             JOptionPane.showMessageDialog(panel, "Finished",
                     "Congratulation", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    public static boolean compareList(List ls1, List ls2) {
+    //score
+    public void applyToScore(int total) {
+		score+=total;
+	}
+    
+
+	public int getScore() {
+		return score;
+	}
+
+	
+	//compare solution
+	public static boolean compareList(List ls1, List ls2) {
         
         return ls1.toString().contentEquals(ls2.toString());
     }
+
+    
+    //ketika melewati waktu yang telah ditentukan akan kalah
+	private void lose(Graphics g) {
+		List<Point> current = new ArrayList<>();
+				
+		if (compareList(solution, current)) {
+			//tampilan game over
+			String msg="Game Over";
+			Font small = new Font("Helvetica", Font.BOLD, 14);
+		    FontMetrics fm = getFontMetrics(small);
+		    g.setColor(Color.white);
+	        g.setFont(small);
+	        g.drawString(msg, (DESIRED_WIDTH - fm.stringWidth(msg)) / 2,
+	                DESIRED_WIDTH / 2);
+	        
+        }
+	}
+
+
+	public Timer getGameTimer() {
+		return gameTimer;
+	}
 
     
 }
