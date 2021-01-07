@@ -1,5 +1,10 @@
 package id.ac.its.erza153.fp;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,23 +13,27 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-public class Score {
+import java.util.Formatter;
+
+import javax.swing.JPanel;
+public class Score extends JPanel implements SaveScore{
 	
 	private String name;
 	private Date date;
-	private ArrayList<Score> scores;
+	private ArrayList<SaveScore> scores;
 	
 	//save in file
-	private static final String scoreFile="C:\\Users\\erzan\\eclipse-workspace\\Final Project Game\\score.txt";
+	private static Formatter scoreFile;
 	//serializable
 	ObjectOutputStream output = null;
 	ObjectInputStream input = null;
 	
 	public Score() {
-		scores=new ArrayList<Score>();
+		scores=this.scores;
+		scores=new ArrayList<SaveScore>();
 	}
 	
-	public ArrayList<Score> getScores() {
+	public ArrayList<SaveScore> getScores() {
 	    loadScoreFile();
 	    sort();
 	    return scores;
@@ -35,16 +44,18 @@ public class Score {
 	    Collections.sort(scores, sc);
 	}
 	
+	//menyimpan player's name dan score
 	public void addScore(String name, int score) {
 	    loadScoreFile();
-	    scores.add(new Score(this.name, this.score));
+		scores.add(new SaveScore(name, score));
 	    updateScoreFile();
 	}
 	
+
 	public void loadScoreFile() {
 	    try {
-	        input = new ObjectInputStream(new FileInputStream(scoreFile));
-	        scores = (ArrayList<Score>) input.readObject();
+	    	scoreFile = new Formatter("C:\\Users\\erzan\\eclipse-workspace\\Final Project Game\\score.txt");
+	        scores = (ArrayList<SaveScore>) scoreFile.readObject();
 	        
 	    } catch (FileNotFoundException e) {
 	        System.out.println("File Not Found " + e.getMessage());
@@ -57,7 +68,7 @@ public class Score {
 	
 	public void updateScoreFile() {
 	    try {
-	        output = new ObjectOutputStream(new FileOutputStream(scoreFile));
+	    	scoreFile = new Formatter("C:\\Users\\erzan\\eclipse-workspace\\Final Project Game\\score.txt");
 	        output.writeObject(scores);
 	    } catch (FileNotFoundException e) {
 	        System.out.println("[Update] FNF Error: " + e.getMessage() + ",the program will try and make a new file");
@@ -70,7 +81,7 @@ public class Score {
 	    String highscoreString = "";
 	       int max = 10;
 
-	    ArrayList<Score> scores;
+	    ArrayList<SaveScore> scores;
 	    scores = getScores();
 
 	    int i = 0;

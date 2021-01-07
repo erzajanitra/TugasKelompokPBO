@@ -1,5 +1,6 @@
 package id.ac.its.erza153.fp;
 
+import javax.swing.Timer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -11,6 +12,9 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
@@ -35,9 +39,9 @@ import javax.swing.SwingConstants;
 
 
 
-public class PuzzleEx extends JFrame{
+public class PuzzleEx extends JPanel implements ActionListener{
 	public static final double UPDATES_PER_SECOND = 0;
-	private JPanel panel;
+
 	private final JLabel label;
     private BufferedImage source;
     private BufferedImage resized;    
@@ -54,10 +58,11 @@ public class PuzzleEx extends JFrame{
     private int DESIRED_WIDTH=450 ;
     //gameTime
     private Timer gameTimer;
+    private int second;
     //score
     private int score;
     //apakah game berjalan
-    private boolean inGame;
+    private static boolean inGame;
    
     
    //constructor PuzzleEx
@@ -66,7 +71,7 @@ public class PuzzleEx extends JFrame{
     
 		this.NUMBER_OF_BUTTONS=NUMBER_OF_BUTTONS;
 		this.label = new JLabel();
-
+		second=0;
 		initUI();
         
      }
@@ -74,7 +79,7 @@ public class PuzzleEx extends JFrame{
    
     private void initUI() {
     	
-    	inGame=true;
+    	setInGame(true);
     	int side= (int) Math.sqrt(NUMBER_OF_BUTTONS);
         solution = new ArrayList<>();
     
@@ -88,9 +93,8 @@ public class PuzzleEx extends JFrame{
       
         buttons = new ArrayList<>();
 
-        panel = new JPanel();
-        panel.setBorder(BorderFactory.createLineBorder(Color.gray));
-        panel.setLayout(new GridLayout(side, side, 0, 0));
+        this.setBorder(BorderFactory.createLineBorder(Color.gray));
+        this.setLayout(new GridLayout(side, side, 0, 0));
 
         try {
             source = loadImage();
@@ -107,8 +111,7 @@ public class PuzzleEx extends JFrame{
         width = resized.getWidth(null);
         height = resized.getHeight(null);
 
-        add(panel, BorderLayout.CENTER);
-
+     
         //membagi image menjadi kotak2 button
         for (int i = 0; i < side; i++) {
 
@@ -123,9 +126,20 @@ public class PuzzleEx extends JFrame{
                 
                 //last button dikosongi
                 if (i == side-1 && j == side-1) {
-                    lastButton = new MyButton();
-                    lastButton.setBorderPainted(false);
-                    lastButton.setContentAreaFilled(false);
+                	try {
+						BufferedImage bimg = loadBlankImage();
+//						int h = getNewHeight(bimg.getWidth(),bimg.getHeight());
+				        resized = resizeImage(bimg, width/side, height/side,
+				                    BufferedImage.TYPE_INT_ARGB);
+						lastButton = new MyButton(resized);
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+//                    
+//                    lastButton.setBorderPainted(false);
+//                    lastButton.setContentAreaFilled(false);
                     lastButton.setLastButton();
                     lastButton.putClientProperty("position", new Point(i, j));
                 } else {
@@ -142,20 +156,16 @@ public class PuzzleEx extends JFrame{
         for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
 
             MyButton btn = buttons.get(i);
-            panel.add(btn);
+            this.add(btn);
             btn.setBorder(BorderFactory.createLineBorder(Color.gray));
-            btn.addActionListener(new ClickAction());
+            btn.addMouseListener(new MouseHandler());
         }
 
-        pack();
-        setTitle("Puzzle");
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+               
         
         //waktu game
-        gameTimer=new Timer(120,this::lose);
-     
+        gameTimer=new Timer(100,this);
+        gameTimer.start();
     	}
     
 
@@ -169,7 +179,14 @@ public class PuzzleEx extends JFrame{
     //load image
     private BufferedImage loadImage() throws IOException {
 
-        BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/photo.jpg"));
+        BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/mickeymouse.jpg"));
+
+        return bimg;
+    }
+    
+    private BufferedImage loadBlankImage() throws IOException {
+
+        BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/blank.jpg"));
 
         return bimg;
     }
@@ -187,10 +204,13 @@ public class PuzzleEx extends JFrame{
         return resizedImage;
     }
     
+    @Override
     public void paintComponent(Graphics g) {
     	 super.paintComponents(g);
-    	 if(inGame) {
-    		 initUI();
+    	 if(isInGame()) {
+    		 textTime(g);
+    		
+    	//System.out.println("cekk");
     		 
     	 }
     	 else {
@@ -198,49 +218,21 @@ public class PuzzleEx extends JFrame{
     	 }
     		 
     }
-   
-      public void actionPerformed(ActionEvent e) {
-        	inGame=true;
-        	checkButton(e);
-        	checkSolution();
-        	
-        }
+    
+    private void textTime(Graphics g) {
     	
-    
-      private void checkButton(ActionEvent e) {
-
-            int lidx = 0;
-            
-            for (MyButton button : buttons) {
-                if (button.isLastButton()) {
-                    lidx = buttons.indexOf(button);
-                }
-            }
-
-            JButton button = (JButton) e.getSource();
-            int bidx = buttons.indexOf(button);
-
-            if ((bidx - 1 == lidx) || (bidx + 1 == lidx)
-                    || (bidx - 3 == lidx) || (bidx + 3 == lidx)) {
-                Collections.swap(buttons, bidx, lidx);
-                updateButtons();
-            }
-        }
-
-       //memetakan list button ke potongan puzzle pada panel
-       private void updateButtons() {
-
-            panel.removeAll();
-
-            for (JComponent btn : buttons) {
-
-                panel.add(btn);
-            }
-            
-            //jika ada posisi puzzle yg berubah
-            panel.validate();
-        }
-    
+    	String msg= second/60 + ":" + second % 60;
+    	//System.out.println(msg);
+    	Font small = new Font("Helvetica", Font.BOLD, 14);
+	    FontMetrics fm = getFontMetrics(small);
+	    g.setColor(Color.black);
+        g.setFont(small);
+        g.drawString(msg, (DESIRED_WIDTH - fm.stringWidth(msg)) / 2,
+                100);
+    	
+		
+	}
+	
     
     
     //checkSolution dengan membandingkan urutan list button dengan potongan puzzle pada panel
@@ -253,9 +245,11 @@ public class PuzzleEx extends JFrame{
         }
 
         if (compareList(solution, current)) {
-        	applyToScore(gameTimer.asSeconds()*100);
-            JOptionPane.showMessageDialog(panel, "Finished",
-                    "Congratulation", JOptionPane.INFORMATION_MESSAGE);
+        	applyToScore(second *100);
+        	//sudah GameOver
+        	setInGame(false);
+        	Time.timer.stop(); //tampilan waktu
+        	gameTimer.stop(); //ketika game sudah selesai
         }
     }
 
@@ -280,10 +274,16 @@ public class PuzzleEx extends JFrame{
     //ketika melewati waktu yang telah ditentukan akan kalah
 	private void lose(Graphics g) {
 		List<Point> current = new ArrayList<>();
-				
+		
+		for (JComponent btn : buttons) {
+            current.add((Point) btn.getClientProperty("position"));
+        }
+		
 		if (compareList(solution, current)) {
+			System.out.println("cek");
 			//tampilan game over
-			String msg="Game Over";
+			this.removeAll();
+			String msg="Game Over/n";
 			Font small = new Font("Helvetica", Font.BOLD, 14);
 		    FontMetrics fm = getFontMetrics(small);
 		    g.setColor(Color.white);
@@ -299,7 +299,97 @@ public class PuzzleEx extends JFrame{
 		return gameTimer;
 	}
 
+
+	private void gameOver() {
+		setInGame(false);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		second++;
+		checkSolution();
+		repaint();
+		
+	}
+
+	private void checkButton(MouseEvent e) {
+
+        int lidx = 0;
+        
+        for (MyButton button : buttons) {
+            if (button.isLastButton()) {
+                lidx = buttons.indexOf(button);
+            }
+        }
+
+        JButton button = (JButton) e.getSource();
+        int bidx = buttons.indexOf(button);
+
+        if ((bidx - 1 == lidx) || (bidx + 1 == lidx)
+                || (bidx - 3 == lidx) || (bidx + 3 == lidx)) {
+            Collections.swap(buttons, bidx, lidx);
+            updateButtons();
+        }
+             
+    }
+	
+	//memetakan list button ke potongan puzzle pada panel
+    private void updateButtons() {
+
+    	this.removeAll();
+
+         for (JComponent btn : buttons) {
+
+        	 this.add(btn);
+         }
+         
+         //jika ada posisi puzzle yg berubah
+         this.validate();
+     }
     
+    public static boolean isInGame() {
+		return inGame;
+	}
+
+
+	public static void setInGame(boolean inGame) {
+		PuzzleEx.inGame = inGame;
+	}
+
+	private class MouseHandler implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			checkButton(e);
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    }
 }
 
 
