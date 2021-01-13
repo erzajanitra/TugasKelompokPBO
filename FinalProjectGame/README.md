@@ -19,8 +19,23 @@ Pada fitur halaman Credits ini akan menampilkan nama-nama *programmer* dan penje
 
 ## Penjelasan Class 
 Terdapat beberapa *class* yang akan digunakan pada projek pembuatan *game* *puzzle* ini, yaitu antara lain: 
+### Game.java Class
+   
+### LeaderBoard.java Class
+   
+### Menu.java Class
 
-   ### SaveScore Class 
+### MyButton.java Class
+
+### PuzzleEx.java Class
+
+### SaveScore.java Class
+
+### Score.java Class
+
+### ScoreCompare.java Class
+
+### Time.java Class
    
 
 # Class Diagram 
