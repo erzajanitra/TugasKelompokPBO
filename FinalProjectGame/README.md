@@ -17,6 +17,12 @@ Dalam fitur penampilan diperlukan class bernama `ScoreInput` dan `ScoreOutput` y
 - **Halaman Credits**<br>
 Pada fitur halaman Credits ini akan menampilkan nama-nama *programmer* dan penjelasan tentang tata cara permainan. Serta, pada fitur halaman Credits juga ditambahkan link http://zetcode.com/javagames/puzzle/ yang dimana link tersebut kami jadikan referensi.
 
+## Penjelasan Class 
+Terdapat beberapa *class* yang akan digunakan pada projek pembuatan *game* *puzzle* ini, yaitu antara lain: 
+
+   ### SaveScore Class 
+   
+
 # Class Diagram 
   Class Diagram yang akan kita gunakan sampai saat ini dapat dilihat: 
   ![classdiagram](https://github.com/rayhandaffa/FinalProject/blob/main/class%20diagram/class%20diagram%20game.jpg)
