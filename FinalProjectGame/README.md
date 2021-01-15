@@ -21,8 +21,60 @@ Pada fitur halaman Credits ini akan menampilkan nama-nama *programmer* dan penje
 Terdapat beberapa *class* yang akan digunakan pada projek pembuatan *game* *puzzle* ini, yaitu antara lain: 
 ### Menu.java 
 Sama dengan namanya class `Menu` ini menyediakan beberapa method yang akan di tampilkan pada jalannya program. Terdapat sebuah constructor bernama Menu yang dimana mempunyai 2 paramater yaitu `int num, String player` yang dimana didalamnya terdapat sebuah inisiasi UI atau `initUI(num)` dan `creditGame()`. Terdapat beberapa method yang akan dijelaskan di bawah ini: 
-- **Menu Screen**
-Pada method untuk menampilkan Menu Screen menggunakan se
+- **Menu Screen**<br>
+Pada method untuk menampilkan Menu Screen menggunakan JOptionPane untuk menampilkan menunya, potongan program dapat dilihat di bawah ini : <br>
+`String[] options1 = {"Play Game", "Choose Level", "Quit Game"} ;
+     // JOptionPane untuk menu screen
+  int input1 = JOptionPane.showOptionDialog(null, 
+    "Welcome to Puzzle Game!", 
+    "Menu", 
+    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options1, options1[0]) ;`
+    <br>
+- **Memasukkan Nama Player**<br>
+Ketika *player* diminta untuk memasukkan nama, terdapat implementasi dari `import java.awt.JTextField` dan ketika awal akan di inisialisi kosong dengan adanya sebuah String bernama `player = " ";`. Tidak hanya itu, terdapat implementasi dari import `java.awt.JOptionPane` dimana ketika *player*  sudah memasukkan namanya akan meng-klik OK untuk akan diarahkan selanjutnya.
+- **Pilihan Level**<br>
+Setelah *player* memasukkan namanya, nama tersebut akan di simpan pada sebuah String di dalam class `LeaderBoard` yang akan digunakan untuk menampilkan peringkat 10 teratas. Yang kemudian akan di arahkan untuk memilih *level*, ketika inilah terdapat implementasi JOptionPane. Untuk potongan program-nya dapat di lihat di bawah ini: <br> 
+//pilihan level
+		
+		
+	String[] options2 = {"Easy", "Medium", "Hard"} ;
+	// JOptionPane untuk memilih level
+		int input2 = JOptionPane.showOptionDialog(null, 
+				"Choose Level", 
+				"Puzzle", 
+				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]) ;
+		
+		//Mengatur nilai num sesuai level yang telah dipilih
+		//easy
+		int num=9;
+		//medium
+		if(input2==1) {
+			num=16;
+		}
+		//hard
+		else if(input2==2) {
+			num=25;
+		}
+        Menu puzzle=new Menu(num,player);
+        //Setelah memilih level, game akan dimulai
+        puzzle.setVisible(true);
+   `int num` disini menjelaskan bahwa berapa banyak potongan gambar yang di inginkan, terdapat 3 pilihan *level* yang disediakan. Untuk pilihan *level easy* terdapat 9 potongan gambar yang akan disediakan, *level medium* dengan potongan gambar 16 dan untuk pilihan *level hard* disediakan potongan gambar sebanyak 25. Untuk `PuzzleEx puzzle = new PuzzleEx(num)` disini menjelaskan penggambaran berapa banyak `num` atau potongan gambar yang telah di atur sesuai dengan pilihan *level* yang di inginkan oleh *player*. Setelah memilih *level* dengan adanya `puzzle.setVisible(true);` yang artinya *game* akan dimulai jika sudah memilih *level*.
+- **Pilihan Quit**<br>
+Ketika *player* tidak ingin memainkan *game puzzle* lagi, terdapat pilihan menu Quit Game yang dimana ketika di-klik terdapat dua opsi yaitu antara "Yes" or "No". Pada menu pilihan Quit ini terdapat implementasi JOptionPane untuk memilih antara kedua pilihan tersebut. Jika *player* meng-klik "Yes" maka game akan keluar dengan sendirinya. Sedangkan jika tidak program akan menjalankan sebuah fungsi bernama `initGame()` yang berisi program yang akan menampilkan menu screen awal.
+- **Credits Game**<br>
+Pada menu Credits Game mengunakan inner class yang merupakan inheritance dari JPanel. Terdapat beberapa cara untuk menggambar atau menampilkan menu Credits Games ini yaitu yang pertama mengatur ukuran panel credit dengan menggunakan `setPreferredSize(new Dimension(DESIRED_WIDTH,450));` yang dimana artinya ukuran panel untuk Credits Games sebesar 450. Selanjutnya, dengan menggunakan `paintComponent` dan menggunakan graphics yang keduanya merupakan hasil implementasi `import java.awt.Graphics` dan `import java.awt.Graphics2D`. Pada proses menggambar komponen-komponen pada panel Credits menggunakan Override, yang dimana artinya proses tersebut menggunakan Static Method. <br> 
+
+		public void creditGame() {
+		add(new credit());
+			
+		pack();
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBackground(Color.BLACK);
+		setVisible(true);
+		}`
+   Potongan Program di atas memberikan arti bahwa ketika Menu Credits pada Menu Game di klik maka akan menampilkan Credits Game yang telah di proses sebelumnya. Setelah itu mengatur posisi String yang akan digambar agar di letakkan ditengah-tengah Panel Credits. Terdapat implementasi dari `import java.awat.Graphics` dimana ditunjukkan adanya penamaan paramater pada 	`drawCenteredSwing` dan adanya implementasi dari `import java.awt.Font` dan `import java.awt.FontMetrics` yang dimana di gunakan ketika Parameter Graphics dengan nama graphic mengambil `getFontMetrics` untuk digunakan ketika menampilkan Credits pada Game.
 ### LeaderBoard.java
 Pada class `LeaderBoard` menampilkan peringkat-peringkat hasil *Score* yang berupa lama waktu-nya *player*. Semakin cepat seorang *player* itu menyelesaikan semua potongannya maka akan semakin ataslah posisinya. `LeaderBoard` class ini menggunakan JPanel untuk menampilkan peringkat 10 teratas dari semua *player* yang berhasil menyelesaikan potongan-potongan gambar. Terdapat beberapa method yang ada di class `LeaderBoard` ini, yaitu: 
 - **Method untuk meng-setting Panel** <br>
@@ -45,8 +97,6 @@ Selanjutnya, terdapat sebuah method `drawCenteredString` yang digunakan untuk me
   `public void drawCenteredString(Graphics g, String text, Font font, int y)` <br>
   
   Berdasarkan potongan *coding*-an di atas dapat dijelaskan bahwa terdapat sebuah `String` bernama text pada parameter untuk string-string yang akan digambarkan. Selanjutnya, di paramater terdapat sebuah `Font` bernama font yang berguna untuk mengatur jenis font yang akan di tulis dan yang terakhir terdapat sebuah variabel y untuk mengatur posisi string pada sumbu y. <br>  
-
-
 ### MyButton.java 
 
 ### PuzzleEx.java 
