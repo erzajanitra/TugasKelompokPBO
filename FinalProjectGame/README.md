@@ -1,7 +1,7 @@
 # FINAL PROJECT : PUZZLE (Game)
 
 Permainan *Puzzle* mungkin sudah tidak asing kita dengar, kata *puzzle* berasal dari bahasa Inggris yang artinya membuat binggung atau teka teki. Sebuah teka-teki adalah permainan, masalah, atau mainan yang menguji kecerdikan atau pengetahuan seseorang. Permainan *puzzle* ini awalnya dimainkan secara *offline*, namun dapat dilihat dari perkembangan zaman yang dimana semua serba *online* dan dapat dimainkan dimana dan kapanpun tanpa ribet membawa potongan-potongan gambar. Oleh karena itu, Final Project kali ini kami berpikir untuk membuat sebuah aplikasi permainan *puzzle* dengan menggunakan *mouse handling*.  
-   
+   ## Fitur - Fitur yang akan diterapkan pada *project*   
  Beberapa fitur yang akan diterapkan pada *project* kali ini adalah: 
 - **Title Screen**<br>
 **Title Screen** adalah sebuah menu utama yang akan menampilkan nama game, *Puzzle*, pilihan *Start Game* yang akan mengarahkan pemain kepada beberapa pilihan *level* yang terdiri dari **Easy**, **Medium**, dan **Hard** agar pemain dapat bermain sesuai dengan *level* yang diinginkan, dan pilihan *Quit Game* jika pemain ingin keluar dari game tersebut.
@@ -16,6 +16,27 @@ Dalam fitur penampilan diperlukan class bernama `ScoreInput` dan `ScoreOutput` y
 
 - **Halaman Credits**<br>
 Pada fitur halaman Credits ini akan menampilkan nama-nama *programmer* dan penjelasan tentang tata cara permainan. Serta, pada fitur halaman Credits juga ditambahkan link http://zetcode.com/javagames/puzzle/ yang dimana link tersebut kami jadikan referensi.
+
+## Penjelasan Class 
+Terdapat beberapa *class* yang akan digunakan pada projek pembuatan *game* *puzzle* ini, yaitu antara lain: 
+### Game.java Class
+   
+### LeaderBoard.java Class
+   
+### Menu.java Class
+
+### MyButton.java Class
+
+### PuzzleEx.java Class
+
+### SaveScore.java Class
+
+### Score.java Class
+
+### ScoreCompare.java Class
+
+### Time.java Class
+   
 
 # Class Diagram 
   Class Diagram yang akan kita gunakan sampai saat ini dapat dilihat: 
