@@ -3,6 +3,8 @@ package id.ac.its.erza153.fp;
 import java.util.Comparator;
 
 public class ScoreCompare implements Comparator<SaveScore>{
+	
+	//membandingkan score pemain untuk mengurutkan high score
 	public int compare(SaveScore score1,SaveScore score2) {
 		
 		int sc1=score1.getScore();

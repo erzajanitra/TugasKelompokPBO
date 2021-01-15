@@ -12,11 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Time extends JPanel implements ActionListener{
-	protected int currentTime;
+	protected static int currentTime;
 	protected static Timer timer;
 	private int DESIRED_WIDTH=450 ;
 	
-	//constructor
+	//constructor Time
 	public Time() {
 		this.currentTime=0;
 		setPreferredSize(new Dimension(DESIRED_WIDTH,40));
@@ -29,13 +29,14 @@ public class Time extends JPanel implements ActionListener{
 		super.paintComponent(g);
 		
 		if(PuzzleEx.isInGame()) {
-			System.out.println("cek");
+			
 			textTime(g);
 		}
 	
 		
 	}
 	
+	//textTime menampilkan waktu yang sedang berjalan selama permainan berlangsung
 	 private void textTime(Graphics g) {
 	    	
 	    	String msg= currentTime/60 + ":" + currentTime % 60;
@@ -47,16 +48,13 @@ public class Time extends JPanel implements ActionListener{
 	        g.drawString("Time Elapsed : "+msg, 5,15);
 	   
 		}
-	//update time
-	public int getUpdatesFromSeconds(double seconds) {
-		return (int) Math.round(seconds*PuzzleEx.UPDATES_PER_SECOND);
-	}
+
 	
 	public void Update() {
 		currentTime++;
 	}
 
-
+	//Agar second pada timer terus bertambah dan terus ditampilkan
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Update();

@@ -38,10 +38,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 
-
 public class PuzzleEx extends JPanel implements ActionListener{
+	
 	public static final double UPDATES_PER_SECOND = 0;
-
 	private final JLabel label;
     private BufferedImage source;
     private BufferedImage resized;    
@@ -49,42 +48,51 @@ public class PuzzleEx extends JPanel implements ActionListener{
     private MyButton lastButton;
     private int width, height;   
      
+    //List button dan solution
     private List<MyButton> buttons;
     private List<Point> solution;
 
-    //jumlah potongan puzzle
+    //Jumlah potongan puzzle sebagai buttons
     private int NUMBER_OF_BUTTONS ;
-    //ukuran window puzzle
+    
+    //Ukuran window puzzle
     private int DESIRED_WIDTH=450 ;
-    //gameTime
+    
+    //Menghitung waktu pemain 
     private Timer gameTimer;
     private int second;
-    //score
+    
+    //score dan playerName untuk ditampilkan pada LeaderBoard
     private int score;
-    //apakah game berjalan
+    private String playerName;
+    
+    //Menandai apakah game sudah dimulai atau belum
     private static boolean inGame;
+    
    
     
-   //constructor PuzzleEx
-    //nilai variable NUMBER_OF_BUTTONS berdasarkan level yang dipilih
-    public PuzzleEx(int NUMBER_OF_BUTTONS) {
+   //Constructor PuzzleEx
+   //Nilai variable NUMBER_OF_BUTTONS berdasarkan level yang dipilih
+    public PuzzleEx(int NUMBER_OF_BUTTONS,String playerName) {
     
 		this.NUMBER_OF_BUTTONS=NUMBER_OF_BUTTONS;
 		this.label = new JLabel();
+		this.playerName=playerName;
 		second=0;
 		initUI();
         
      }
 
-   
+    //Method initUI untuk memotong gambar menjadi potongan puzzle berukuran kecil
     private void initUI() {
     	
+    	//Game sedang berjalan
     	setInGame(true);
+    	
     	int side= (int) Math.sqrt(NUMBER_OF_BUTTONS);
         solution = new ArrayList<>();
-    
-        
-        //jumlah kotak
+               
+        //Jumlah potongan puzzle
         for(int i=0;i<side;i++) {
         	for(int j=0;j<side;j++) {
         		solution.add(new Point(i,j));
@@ -93,6 +101,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
       
         buttons = new ArrayList<>();
 
+        //Ukuran potongan puzzle
         this.setBorder(BorderFactory.createLineBorder(Color.gray));
         this.setLayout(new GridLayout(side, side, 0, 0));
 
@@ -112,7 +121,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
         height = resized.getHeight(null);
 
      
-        //membagi image menjadi kotak2 button
+        //membagi image menjadi potongan puzzle berupa button
         for (int i = 0; i < side; i++) {
 
             for (int j = 0; j < side; j++) {
@@ -128,7 +137,6 @@ public class PuzzleEx extends JPanel implements ActionListener{
                 if (i == side-1 && j == side-1) {
                 	try {
 						BufferedImage bimg = loadBlankImage();
-//						int h = getNewHeight(bimg.getWidth(),bimg.getHeight());
 				        resized = resizeImage(bimg, width/side, height/side,
 				                    BufferedImage.TYPE_INT_ARGB);
 						lastButton = new MyButton(resized);
@@ -137,10 +145,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-//                    
-//                    lastButton.setBorderPainted(false);
-//                    lastButton.setContentAreaFilled(false);
-                    lastButton.setLastButton();
+                	lastButton.setLastButton();
                     lastButton.putClientProperty("position", new Point(i, j));
                 } else {
                     buttons.add(button);
@@ -148,11 +153,11 @@ public class PuzzleEx extends JPanel implements ActionListener{
             }
         }
         
-        //shuffle elemen button secara random, kecuali last button
+        //Shuffle elemen button secara random, kecuali pada last button
         Collections.shuffle(buttons);
         buttons.add(lastButton);
         
-        //semua komponen button diletakkan pada panel puzzle
+        //Semua komponen button diletakkan pada panel puzzle
         for (int i = 0; i < NUMBER_OF_BUTTONS; i++) {
 
             MyButton btn = buttons.get(i);
@@ -163,12 +168,12 @@ public class PuzzleEx extends JPanel implements ActionListener{
 
                
         
-        //waktu game
+        //Timer untuk game akan dimulai ketika pemain memulai game
         gameTimer=new Timer(100,this);
         gameTimer.start();
     	}
     
-
+    //Mendapatkan ukuran gambar
     private int getNewHeight(int w, int h) {
 
         double ratio = DESIRED_WIDTH / (double) w;
@@ -176,7 +181,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
         return newHeight;
     }
     
-    //load image
+    //Load image puzzle dari file directory
     private BufferedImage loadImage() throws IOException {
 
         BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/mickeymouse.jpg"));
@@ -184,6 +189,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
         return bimg;
     }
     
+    //Load image untuk bagian kosong puzzle dari file directory
     private BufferedImage loadBlankImage() throws IOException {
 
         BufferedImage bimg = ImageIO.read(new File("C:/Users/erzan/eclipse-workspace/FinalProjectGame/blank.jpg"));
@@ -191,7 +197,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
         return bimg;
     }
     
-    //resize image untuk menjaga rasio image
+    //resizeImage untuk menjaga rasio gambar puzzle
     private BufferedImage resizeImage(BufferedImage originalImage, int width,
             int height, int type) throws IOException {
 
@@ -204,14 +210,13 @@ public class PuzzleEx extends JPanel implements ActionListener{
         return resizedImage;
     }
     
+    //Menampilkan textTime ketika permainan sedang berjalan
     @Override
     public void paintComponent(Graphics g) {
     	 super.paintComponents(g);
     	 if(isInGame()) {
     		 textTime(g);
-    		
-    	//System.out.println("cekk");
-    		 
+    	  	    		 
     	 }
     	 else {
     		 lose(g);
@@ -219,10 +224,10 @@ public class PuzzleEx extends JPanel implements ActionListener{
     		 
     }
     
+    //textTime menampilkan waktu yang sedang berjalan selama permainan berlangsung
     private void textTime(Graphics g) {
     	
     	String msg= second/60 + ":" + second % 60;
-    	//System.out.println(msg);
     	Font small = new Font("Helvetica", Font.BOLD, 14);
 	    FontMetrics fm = getFontMetrics(small);
 	    g.setColor(Color.black);
@@ -233,9 +238,8 @@ public class PuzzleEx extends JPanel implements ActionListener{
 		
 	}
 	
-    
-    
-    //checkSolution dengan membandingkan urutan list button dengan potongan puzzle pada panel
+        
+    //checkSolution dengan membandingkan urutan list button yang berisi urutan puzzle yang benar dengan potongan puzzle pada panel
     private void checkSolution() {
 
         List<Point> current = new ArrayList<>();
@@ -246,19 +250,19 @@ public class PuzzleEx extends JPanel implements ActionListener{
 
         if (compareList(solution, current)) {
         	applyToScore(second *100);
-        	//sudah GameOver
+        	//ketika sudah GameOver
         	setInGame(false);
         	Time.timer.stop(); //tampilan waktu
-        	gameTimer.stop(); //ketika game sudah selesai
+        	gameTimer.stop(); //ketika game sudah selesai timer akan berhenti
         }
     }
 
-    //score
+    //Menghitung score pemain
     public void applyToScore(int total) {
 		score+=total;
 	}
     
-
+    //getter score
 	public int getScore() {
 		return score;
 	}
@@ -271,7 +275,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
     }
 
     
-    //ketika melewati waktu yang telah ditentukan akan kalah
+	//Menampilkan waktu selesai permainan, score pemain, dan high score
 	private void lose(Graphics g) {
 		List<Point> current = new ArrayList<>();
 		
@@ -281,17 +285,24 @@ public class PuzzleEx extends JPanel implements ActionListener{
 		
 		if (compareList(solution, current)) {
 			System.out.println("cek");
-			//tampilan game over
-			this.removeAll();
-			String msg="Game Over/n";
-			Font small = new Font("Helvetica", Font.BOLD, 14);
-		    FontMetrics fm = getFontMetrics(small);
-		    g.setColor(Color.white);
-	        g.setFont(small);
-	        g.drawString(msg, (DESIRED_WIDTH - fm.stringWidth(msg)) / 2,
-	                DESIRED_WIDTH / 2);
-	        
+			
+			this.setVisible(false);
+			System.out.println(playerName);
+			Score highScore=new Score();
+			highScore.addScore(playerName, Time.currentTime * 100);
+			
+			//JFrame untuk menampilkan waktu selesai permainan, score pemain, dan high score
+			JFrame frame=new JFrame();
+			frame.add(new LeaderBoard());
+			frame.pack();
+			frame.setTitle("High Score");
+			frame.setBackground(Color.BLACK);
+			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
         }
+	
 	}
 
 
@@ -304,7 +315,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
 		setInGame(false);
 	}
 
-
+	//Second pada Timer akan terus bertambah dan terus ditampilkan selama game berlangsung
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		second++;
@@ -313,6 +324,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
 		
 	}
 
+	//Mengacak posisi button puzzle
 	private void checkButton(MouseEvent e) {
 
         int lidx = 0;
@@ -334,7 +346,7 @@ public class PuzzleEx extends JPanel implements ActionListener{
              
     }
 	
-	//memetakan list button ke potongan puzzle pada panel
+	//Memetakan list button ke potongan puzzle pada panel
     private void updateButtons() {
 
     	this.removeAll();
