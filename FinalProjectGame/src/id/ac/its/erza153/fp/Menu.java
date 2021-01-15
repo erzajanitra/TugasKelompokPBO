@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -19,16 +20,20 @@ public class Menu extends JFrame{
 	
 	private String playerName;
 	private static int DESIRED_WIDTH=500 ;
-	private static Font ft1=new Font("ComicSans",Font.BOLD,30);
-	private static Font ft2=new Font("ComicSans",Font.BOLD,20);
-	private static Font ft3=new Font("ComicSans",Font.BOLD,15);
+	private static Font ft1=new Font("Montserrat",Font.BOLD,25);
+	private static Font ft2=new Font("Montserrat",Font.BOLD,20);
+	private static Font ft3=new Font("Montserrat",Font.BOLD,15);
 
-	
+	//constructor Menu 
 	public Menu(int num,String player) {
 		this.playerName=player;
 		initUI(num);
-		
-		//initLeaderBoard();
+	
+	}
+	
+	//constructor Menu
+	public Menu() {
+		creditGame();
 	}
 	
 	
@@ -54,7 +59,7 @@ public class Menu extends JFrame{
 	
 	public static void initGame() {
 		
-		String[] options1 = {"Play Game","High Scores" ,"Quit Game","Credits"} ;
+		String[] options1 = {"Play Game" ,"Quit Game","Credits"} ;
     	// JOptionPane untuk menu screen
 		int input1 = JOptionPane.showOptionDialog(null, 
 				"Welcome to Puzzle Game!", 
@@ -65,18 +70,16 @@ public class Menu extends JFrame{
 		if(input1==0) {
 			playGame();
 		}
+	
 		else if(input1==1) {
-			Score highscore=new Score();
-			highscore.getHighscoreString();
-		}
-		else if(input1==2) {
 			quitGame();
 		}
-		else if(input1==3) {
-			creditGame();
+		else if(input1==2) {
+			new Menu();
 		}
 	}
 
+	//Menampilkan pilihan yang ada ketika memilih play game pada menu
 	public static void playGame() {
 	//input player's name
 		JTextField name=new JTextField();
@@ -106,7 +109,7 @@ public class Menu extends JFrame{
 				"Puzzle", 
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options2, options2[0]) ;
 		
-		//set levelnya
+		//Mengatur nilai num sesuai level yang telah dipilih
 		//easy
 		int num=9;
 		//medium
@@ -118,10 +121,12 @@ public class Menu extends JFrame{
 			num=25;
 		}
         Menu puzzle=new Menu(num,player);
+        //Setelah memilih level, game akan dimulai
         puzzle.setVisible(true);
 
 	}
 	
+	//Menampilkan pilihan yang ada ketika memilih quit game pada menu
 	public static void quitGame() {
 	//pilihan Yes untuk keluar game dan pilihan No untuk kembali ke Game
 		String[] options3 = {"Yes","No"} ;
@@ -143,40 +148,23 @@ public class Menu extends JFrame{
 		}
 	}
 	
-	public static void creditGame() {
-		JFrame window = new JFrame("Credits"); 
-		window.add(new JLabel());
+	//Menampilkan credit game ketika memilih credits pada menu game
+	public void creditGame() {
 		
-		//casting Graphics
-		Graphics2D g = null;
-		draw((Graphics2D)g);
-		
-		window.pack();
-		window.setResizable(false);
-		window.setLocationRelativeTo(null);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setVisible(true);
+		add(new credit());
+			
+		pack();
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBackground(Color.BLACK);
+		setVisible(true);
 	}
 
-	
-	private static void draw(Graphics2D g) {
-		g.setBackground(Color.WHITE);
-		
-		g.setColor(new Color(98, 95, 145));
-		drawCenteredString(g,"Final Project Pemograman Berbasis Objek",ft1,50);
-		
-		drawCenteredString(g,"Puzzle Game ",ft2,100);
-		drawCenteredString(g,"Referensi : http://zetcode.com/javagames/puzzle/ ",ft3,100);
-		drawCenteredString(g,"Credit by:",ft2,100);
-		drawCenteredString(g,"Kirana Zea S.M. - 05111940000081",ft3,100);
-		drawCenteredString(g,"Rayhan Daffa A - 051119400000227",ft3,100);
-		drawCenteredString(g,"Rayhan Daffa A - 051119400000227",ft3,100);
-		drawCenteredString(g,"Pemograman Berbasis Objek kelas E, Informatika - ITS\\",ft3,100);
-		
-		
-		
-	}
-	
+	//Mengatur posisi String yang akan digambar agar terletak ditengah-tengah panel LeaderBoard
+	//Terdapat String text pada parameter untuk string yang akan digambar
+	//Terdapat Font font pada parameter untuk mengatur font tulisan
+	//Terdapat variabel y pada parameter untuk mengatur posisi string pada sumbu y
 	public static void drawCenteredString(Graphics g, String text, Font font, int y) {
         FontMetrics metrics = g.getFontMetrics(font);
         int x = (DESIRED_WIDTH - metrics.stringWidth(text)) / 2;
@@ -184,4 +172,41 @@ public class Menu extends JFrame{
         g.setFont(font);
         g.drawString(text, x, y);
     }
+	
+	//Inner class yang merupakan inheritance dari JPanel
+	class credit extends JPanel{
+		
+		//Megatur ukuran panel credits
+		public credit() {
+			setPreferredSize(new Dimension(DESIRED_WIDTH,450));
+		}
+		
+		//Proses menggambar komponen2 pada panel credits
+		@Override
+		public void paintComponent(Graphics g) {
+			((Graphics2D) g).setBackground(Color.WHITE);
+			
+			g.setColor(new Color(230, 255, 255));
+			drawCenteredString(g,"Final Project",ft1,70);
+			drawCenteredString(g,"Pemograman Berbasis Objek",ft1,100);
+			drawCenteredString(g,"Puzzle Game ",ft2,150);
+		
+			g.setColor(new Color(242, 242, 242));
+			drawCenteredString(g,"Referensi : http://zetcode.com/javagames/puzzle/ ",ft3,170);
+			
+			g.setColor(new Color(230, 255, 255));
+			drawCenteredString(g,"Credit by:",ft2,220);
+			g.setColor(new Color(242, 242, 242));
+			drawCenteredString(g,"Kirana Zea S.M. - 05111940000081",ft3,240);
+			drawCenteredString(g,"Erza Janitradevi N- 051119400000153",ft3,260);
+			drawCenteredString(g,"Rayhan Daffa A - 051119400000227",ft3,280);
+			
+			g.setColor(new Color(230, 255, 255));
+			drawCenteredString(g,"Pemrograman Berbasis Objek Kelas E",ft3,350);
+			drawCenteredString(g,"Informatika - ITS",ft3,380);
+			
+			
+			
+		}
+	}
 }

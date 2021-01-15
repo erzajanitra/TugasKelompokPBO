@@ -16,7 +16,7 @@ public class Time extends JPanel implements ActionListener{
 	protected static Timer timer;
 	private int DESIRED_WIDTH=450 ;
 	
-	//constructor
+	//constructor Time
 	public Time() {
 		this.currentTime=0;
 		setPreferredSize(new Dimension(DESIRED_WIDTH,40));
@@ -36,6 +36,7 @@ public class Time extends JPanel implements ActionListener{
 		
 	}
 	
+	//textTime menampilkan waktu yang sedang berjalan selama permainan berlangsung
 	 private void textTime(Graphics g) {
 	    	
 	    	String msg= currentTime/60 + ":" + currentTime % 60;
@@ -53,7 +54,7 @@ public class Time extends JPanel implements ActionListener{
 		currentTime++;
 	}
 
-
+	//Agar second pada timer terus bertambah dan terus ditampilkan
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Update();

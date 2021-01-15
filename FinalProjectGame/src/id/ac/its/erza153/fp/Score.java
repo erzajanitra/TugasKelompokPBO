@@ -26,7 +26,7 @@ public class Score extends JPanel {
 	
 	//save in file
 	private static Formatter scoreFile;
-	//serializable
+	//serializable output dan input
 	ObjectOutputStream output = null;
 	ObjectInputStream input = null;
 	
@@ -46,14 +46,14 @@ public class Score extends JPanel {
 	    Collections.sort(scores, sc);
 	}
 	
-	//menyimpan player's name dan score
+	//menyimpan nama pemain dan score
 	public void addScore(String name, int score) {
 	    loadScoreFile();
 		scores.add(new SaveScore(name, score));
 	    updateScoreFile();
 	}
 	
-
+	//Membaca file score.txt yang menyimpan high score pemain
 	public void loadScoreFile() {
 	    try {
 	    	input = new ObjectInputStream(
@@ -70,6 +70,7 @@ public class Score extends JPanel {
 	    } 
 	}
 	
+	//Menuliskan score pemain pada score.txt untuk disimpan
 	public void updateScoreFile() {
 	    try {
 	    	output = new ObjectOutputStream(
@@ -83,6 +84,8 @@ public class Score extends JPanel {
 	    } 
 	    
 	}
+	
+	//Menampilkan high score pemain
 	public ArrayList<SaveScore> getHighscoreString() {
 	    	       
 	    ArrayList<SaveScore> scores;

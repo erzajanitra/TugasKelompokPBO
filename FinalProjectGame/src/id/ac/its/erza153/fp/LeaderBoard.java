@@ -18,24 +18,22 @@ public class LeaderBoard extends JPanel{
 	
 	private Score highScore;
 	
-	private int DESIRED_WIDTH=500 ;
-	private static Font ft1=new Font("ComicSans",Font.BOLD,30);
-	private static Font ft2=new Font("ComicSans",Font.BOLD,20);
-	private static Font ft3=new Font("ComicSans",Font.BOLD,15);
+	private int DESIRED_WIDTH=500;
+	private static Font ft1=new Font("Montserrat",Font.BOLD,30);
+	private static Font ft2=new Font("Montserrat",Font.BOLD,20);
+	private static Font ft3=new Font("Montserrat",Font.BOLD,15);
 	
+	//constructor LeaderBoard
 	public LeaderBoard() {
 		highScore=new Score();
 		initUI();
 	}
 	
+	//Mengatur ukuran panel LeaderBoard, warna background, dan setVisible(true) untuk menampilkan panel
 	public void initUI() {
-//			
-//		this.add(new JLabel("<html>Congratulations<br>" +"<br> You solve the puzzle in "+Time.currentTime+" second<br>"+""+
-//				"<br>High Scores<br>" + highScore.getHighscoreString()), 
-//				   BorderLayout.CENTER,
-//				   SwingConstants.CENTER);
-//		this.setBorder(BorderFactory.createLineBorder(Color.gray));
+
 		setPreferredSize(new Dimension(DESIRED_WIDTH,450));
+		setBackground(Color.BLACK);
 		this.setVisible(true);
 		
        
@@ -47,27 +45,33 @@ public class LeaderBoard extends JPanel{
 		draw((Graphics2D)g);
 	}
 
+	//Proses menampilkan komponen2 pada panel LeaderBoard
+	//Mengatur warna tulisan
+	//Memanggil method drawCenteredString untuk menggambar string
 	private void draw(Graphics2D g) {
-		g.setBackground(Color.WHITE);
-		g.setColor(new Color(98, 95, 145));
-		g.setFont(new Font("ComicSans",Font.BOLD,30));
-		drawCenteredString(g,"Congratulations",ft1,50);
+		g.setBackground(Color.BLACK);
 		
-		g.setColor(new Color(76, 75, 93));
-		drawCenteredString(g,"You solve the puzzle in "+Time.currentTime+" second",ft2,150);
+		g.setColor(new Color(230, 255, 255));
+		drawCenteredString(g,"Congratulations!",ft1,80);
+		
+		g.setColor(new Color(242, 242, 242));
+		drawCenteredString(g,"You solve the puzzle in "+Time.currentTime+" second",ft2,120);
+		
+		g.setColor(new Color(230, 255, 255));
+		drawCenteredString(g,"High Scores: ",ft2,180);
 				
 		//high Score
-		
 		int i = 0,max=10;
+		int y=210;
         int a = highScore.getHighscoreString().size();
         if (a > max) {
         	a = max;
         }
-        while (i < 10) {
+        while (i < a) {
         		String scores = (i + 1) + "." + highScore.getHighscoreString().get(i).getName() + " " + highScore.getHighscoreString().get(i).getScore();
-        		int y=200;
-        		g.setColor(new Color(76, 75, 93));
-        		drawCenteredString(g,"High Scores"+ scores,ft3,y);
+        		
+        		g.setColor(new Color(242, 242, 242));
+        		drawCenteredString(g,scores,ft3,y);
         		i++;
         		y+=20;
         	}
@@ -75,10 +79,11 @@ public class LeaderBoard extends JPanel{
         
         }
 		
-	
-	
 
-	//supaya String terletak ditengah-tengah JPanel
+	//Mengatur posisi String yang akan digambar agar terletak ditengah-tengah panel LeaderBoard
+	//Terdapat String text pada parameter untuk string yang akan digambar
+	//Terdapat Font font pada parameter untuk mengatur font tulisan
+	//Terdapat variabel y pada parameter untuk mengatur posisi string pada sumbu y
 	public void drawCenteredString(Graphics g, String text, Font font, int y) {
         FontMetrics metrics = g.getFontMetrics(font);
         int x = (DESIRED_WIDTH - metrics.stringWidth(text)) / 2;
