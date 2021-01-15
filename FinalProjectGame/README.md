@@ -68,12 +68,12 @@ Selanjutnya, terdapat sebuah method `drawCenteredString` yang digunakan untuk me
 
 ## Dokumentasi Jalannya Program** <br>
 Berikut adalah contoh jalannya program untuk pilihan `Credit Game`:
-<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-credits.gif" width="400" height="350"/>
+<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-credits.gif" width="350" height="300"/>
 
 - **Memainkan Puzzle**<br>
 Berikut adalah contoh jalannya program ketika di mainkan: 
-<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-level-puzzle.gif" width="400" height="350"/>
+<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-level-puzzle.gif" width="350" height="300"/>
 
 - **Ketika Player Berhasil Menyelesaikan Puzzle**<br>
 Berikut adalah contoh jalannya program ketika *Player* dapat menyelesaikan Puzzle: 
-<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/puzzle-leaderboard.gif" width="400" height="350"/>
+<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/puzzle-leaderboard.gif" width="350" height="300"/>
