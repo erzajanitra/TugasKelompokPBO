@@ -105,12 +105,11 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
 ### Score.java 
 `Score` digunakan untuk menyimpan nama pemain dan score pemain pada file *Score.txt* menggunakan implementasi dari *Serializable* yaitu *ObjectOutputStream* untuk menyimpan pada file txt dan *ObjectInputStream* untuk membaca file txt. Beberapa method yang disediakan antara lain:  
 - **Nama pemain dan score pemain diurutkan pada method *sort()* yang memanggil class *ScoreCompare* untuk melalukan fungsi mengurutkan score.**<br>
-Nama pemain dan score pemain diurutkan pada method *sort()* yang memanggil class *ScoreCompare* untuk melalukan fungsi mengurutkan score.<br>
-
-`private void sort() {
+ 	`private void sort() {
 	    ScoreCompare sc = new ScoreCompare();
 	    Collections.sort(scores, sc);
 	}`
+	  
 - **Method *getHighScoreString()*  digunakan untuk mengreturn nilai array score yang telah diurutkan untuk kemudian akan ditampilkan pada Panel `LeaderBoard`.**<br>	
 
 	    public ArrayList<SaveScore> getHighscoreString() {	       
