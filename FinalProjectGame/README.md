@@ -101,14 +101,13 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
 ### PuzzleEx.java 
 `PuzzleEx` merupakan sebuah class yang berisi untuk mencetak atau menggambar sebuah *puzzle*  yang menggunakan perpanjangan dari JPanel dan menggunakan implementasi `ActionListener`. Pertama terdapat sebuah constructor `PuzzleEx` yang berisi `NUMBER_OF_BUTTONS` yang merupakan potongan gambar berdasarkan level yang dipilih. Method `initUI()` untuk memotong gambar menjadi potongan *puzzle* berukuran kecil. Pada Panel `PuzzleEx` ini juga menampilkan textTime serta *game*-nya. Implementasi `ActionListener` yaitu berupa class MouseHandler dan menggunakan implementasi MouseListener ketika Mouse tersebut di *click* dan di *press*
 ### SaveScore.java 
-`SaveScore` digunakan untuk menyimpan Score yang telah di lakukan *player* dengan mengimpelmentasikan `Serializable`. getHighScore string digunakan untuk mengreturn nilai array yang nantinya akan di tampilkan pada Panel `LeaderBoard`
+`SaveScore` digunakan untuk menyimpan nama pemain dan score pemain yang telah di lakukan *player* dengan mengimpelmentasikan interface `Serializable`. `SaveScore` memiliki getter `getScore` dan `getName`agar nama pemain dan score pemain dapat di passing ke class lain yang membutuhkan kedua atribut tersebut.
 ### Score.java 
-
+`Score` digunakan untuk menyimpan nama pemain dan score pemain pada file *Score.txt* menggunakan implementasi dari *Serializable* yaitu *ObjectOutputStream* untuk menyimpan pada file txt dan *ObjectInputStream* untuk membaca file txt. Nama pemain dan score pemain diurutkan pada method *sort()* yang memanggil class *ScoreCompare* untuk melalukan fungsi mengurutkan score. Method *getHighScoreString()*  digunakan untuk mengreturn nilai array score yang telah diurutkan untuk kemudian akan ditampilkan pada Panel `LeaderBoard`.
 ### ScoreCompare.java 
-
+`ScoreCompare `digunakan untuk membandingkan score pemain dan mengurutkan score tersebut agar bisa ditambilkan menjadi bentuk ranking pada tampilan panel `LeaderBoard`.
 ### Time.java 
-   
-
+ `Time` merupakan sebuah class yang mengatur berjalannya waktu ketika permainan dimulai dengan mengimport *javax.swing.Timer*. Method *timer.start()* digunakan untuk memulai waktu ketika game sudah dimulai. Waktu tersebut ditampilkan di pojok kiri atas (*Time Elapsed*)  dengan method *textTime* yang mengimport *javax.awt.Graphics*. Override method *actionPerformed* digunakan agar waktu tersebut dapat terus bertambah dan dapat terus ditampilkan ketika game berjalan.
 ## Class Diagram 
   Class Diagram yang akan kita gunakan sampai saat ini dapat dilihat: 
   ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram%20puzzle.jpg)
