@@ -1,6 +1,14 @@
 # FINAL PROJECT : PUZZLE (Game)
 
 Permainan *Puzzle* mungkin sudah tidak asing kita dengar, kata *puzzle* berasal dari bahasa Inggris yang artinya membuat binggung atau teka teki. Sebuah teka-teki adalah permainan, masalah, atau mainan yang menguji kecerdikan atau pengetahuan seseorang. Permainan *puzzle* ini awalnya dimainkan secara *offline*, namun dapat dilihat dari perkembangan zaman yang dimana semua serba *online* dan dapat dimainkan dimana dan kapanpun tanpa ribet membawa potongan-potongan gambar. Oleh karena itu, Final Project kali ini kami berpikir untuk membuat sebuah aplikasi permainan *puzzle* dengan menggunakan *mouse handling*.  
+
+   ## Perubahan yang dilakukan dari referensi yang ada 
+   - Menambahkan main menu dengan pilihan "Play Game" "Quit" dan "Credit"
+   - Terdapat pilihan *level* dengan potongan gambar yang berebda-beda untuk tiap pilhan *level*
+   - Dapat memasukkan nama *player*
+   - Penampilan waktu pada saat *game* berjalan 
+   - Penambahan panel leaderboard dan tulisan "Congratulations!"
+   
    ## Fitur - Fitur yang akan diterapkan pada *project*   
  Beberapa fitur yang akan diterapkan pada *project* kali ini adalah: 
 - **Title Screen**<br>
@@ -136,7 +144,8 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
   Class Diagram yang akan kita gunakan sampai saat ini dapat dilihat: 
   ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram%20puzzle.jpg)
 ## Link Video Presentasi 
-
+Jalannya Program dengan menggunakan *Puzzle Game* dapat dilihat pada link berikut: 
+[Puzzle Game]()
 ## Dokumentasi Jalannya Program** <br>
 Berikut adalah contoh jalannya program untuk pilihan `Credit Game`:
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-credits.gif" width="350" height="300"/>
