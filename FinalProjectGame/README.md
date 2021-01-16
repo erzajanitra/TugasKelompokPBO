@@ -103,9 +103,28 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
 ### SaveScore.java 
 `SaveScore` digunakan untuk menyimpan nama pemain dan score pemain yang telah di lakukan *player* dengan mengimpelmentasikan interface `Serializable`. `SaveScore` memiliki getter `getScore` dan `getName`agar nama pemain dan score pemain dapat di passing ke class lain yang membutuhkan kedua atribut tersebut.
 ### Score.java 
-`Score` digunakan untuk menyimpan nama pemain dan score pemain pada file *Score.txt* menggunakan implementasi dari *Serializable* yaitu *ObjectOutputStream* untuk menyimpan pada file txt dan *ObjectInputStream* untuk membaca file txt. Nama pemain dan score pemain diurutkan pada method *sort()* yang memanggil class *ScoreCompare* untuk melalukan fungsi mengurutkan score. Method *getHighScoreString()*  digunakan untuk mengreturn nilai array score yang telah diurutkan untuk kemudian akan ditampilkan pada Panel `LeaderBoard`.
+`Score` digunakan untuk menyimpan nama pemain dan score pemain pada file *Score.txt* menggunakan implementasi dari *Serializable* yaitu *ObjectOutputStream* untuk menyimpan pada file txt dan *ObjectInputStream* untuk membaca file txt. 
+**Nama pemain dan score pemain diurutkan pada method *sort()* yang memanggil class *ScoreCompare* untuk melalukan fungsi mengurutkan score.**<br>
+	private void sort() {
+	    ScoreCompare sc = new ScoreCompare();
+	    Collections.sort(scores, sc);
+	}
+**Method *getHighScoreString()*  digunakan untuk mengreturn nilai array score yang telah diurutkan untuk kemudian akan ditampilkan pada Panel `LeaderBoard`.**<br>
+	public ArrayList<SaveScore> getHighscoreString() {
+	   ArrayList<SaveScore> scores;
+	    scores = getScores();
+	    return scores;
+	}
 ### ScoreCompare.java 
 `ScoreCompare `digunakan untuk membandingkan score pemain dan mengurutkan score tersebut agar bisa ditambilkan menjadi bentuk ranking pada tampilan panel `LeaderBoard`.
+**Method Compare untukmembandingkan score pemain dan mengurutkan score `ScoreCompare`** <br>
+	if (sc1 > sc2){
+	        return -1;  // -1 means first score is bigger then second score
+	    }else if (sc1 < sc2){
+	        return +1;  // +1 means that score is lower
+	    }else{
+	        return 0;  // 0 means score is equal
+	    }
 ### Time.java 
  `Time` merupakan sebuah class yang mengatur berjalannya waktu ketika permainan dimulai dengan mengimport *javax.swing.Timer*. Method *timer.start()* digunakan untuk memulai waktu ketika game sudah dimulai. Waktu tersebut ditampilkan di pojok kiri atas (*Time Elapsed*)  dengan method *textTime* yang mengimport *javax.awt.Graphics*. Override method *actionPerformed* digunakan agar waktu tersebut dapat terus bertambah dan dapat terus ditampilkan ketika game berjalan.
 ## Class Diagram 
