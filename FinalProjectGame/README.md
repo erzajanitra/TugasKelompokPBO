@@ -159,5 +159,6 @@ Berikut adalah contoh jalannya program ketika *Player* dapat menyelesaikan Puzzl
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/puzzle-leaderboard.gif" width="350" height="300"/>
 
 - **Ketika Player memilih Quit Game**<br>
+Berikut adalah contoh jalannya program ketika *Player* memilih button Credit:
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/quit%20game.gif" width="450" height="200"/>
 
