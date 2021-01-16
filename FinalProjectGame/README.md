@@ -58,7 +58,8 @@ Setelah *player* memasukkan namanya, nama tersebut akan di simpan pada sebuah `S
         puzzle.setVisible(true);
    `int num` disini menjelaskan bahwa berapa banyak potongan gambar yang di inginkan, terdapat 3 pilihan *level* yang disediakan. Untuk pilihan *level easy* terdapat 9 potongan gambar yang akan disediakan, *level medium* dengan potongan gambar 16 dan untuk pilihan *level hard* disediakan potongan gambar sebanyak 25. Untuk `PuzzleEx puzzle = new PuzzleEx(num)` disini menjelaskan penggambaran berapa banyak `num` atau potongan gambar yang telah di atur sesuai dengan pilihan *level* yang di inginkan oleh *player*. Setelah memilih *level* dengan adanya `puzzle.setVisible(true);` yang artinya *game* akan dimulai jika sudah memilih *level*.
 - **Pilihan Quit**<br>
-Ketika *player* tidak ingin memainkan *game puzzle* lagi, terdapat pilihan menu Quit Game yang dimana ketika di-klik terdapat dua opsi yaitu antara "Yes" or "No". Pada menu pilihan Quit ini terdapat implementasi JOptionPane untuk memilih antara kedua pilihan tersebut. Jika *player* meng-klik "Yes" maka game akan keluar dengan sendirinya. Sedangkan jika tidak program akan menjalankan sebuah fungsi bernama `initGame()` yang berisi program yang akan menampilkan menu screen awal.
+Ketika *player* tidak ingin memainkan *game puzzle* lagi, terdapat pilihan menu Quit Game yang dimana ketika di-klik terdapat dua opsi yaitu antara "Yes" or "No". Pada menu pilihan Quit ini terdapat implementasi JOptionPane untuk memilih antara kedua pilihan tersebut. Jika *player* meng-klik "Yes" maka game akan keluar dengan sendirinya. Sedangkan jika tidak program akan menjalankan sebuah fungsi bernama `initGame()` yang berisi program yang akan menampilkan menu screen awal.<br>
+
 - **Credits Game**<br>
 Pada menu Credits Game mengunakan inner class yang merupakan inheritance dari JPanel. Terdapat beberapa cara untuk menggambar atau menampilkan menu Credits Games ini yaitu yang pertama mengatur ukuran panel credit dengan menggunakan `setPreferredSize(new Dimension(DESIRED_WIDTH,450));` yang dimana artinya ukuran panel untuk Credits Games sebesar 450. Selanjutnya, dengan menggunakan `paintComponent` dan menggunakan graphics yang keduanya merupakan hasil implementasi `import java.awt.Graphics` dan `import java.awt.Graphics2D`. Pada proses menggambar komponen-komponen pada panel Credits menggunakan Override, yang dimana artinya proses tersebut menggunakan Static Method. <br> 
 
@@ -110,7 +111,7 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
 
 ## Class Diagram 
   Class Diagram yang akan kita gunakan sampai saat ini dapat dilihat: 
-  ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram/class%20diagram%20puzzle.mdj)
+  ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram%20puzzle.jpg)
 ## Link Video Presentasi 
 
 ## Dokumentasi Jalannya Program** <br>
@@ -124,3 +125,7 @@ Berikut adalah contoh jalannya program ketika di mainkan:
 - **Ketika Player Berhasil Menyelesaikan Puzzle**<br>
 Berikut adalah contoh jalannya program ketika *Player* dapat menyelesaikan Puzzle: 
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/puzzle-leaderboard.gif" width="350" height="300"/>
+
+- **Ketika Player memilih Quit Game**<br>
+<img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/quit%20game.gif" width="450" height="200"/>
+
