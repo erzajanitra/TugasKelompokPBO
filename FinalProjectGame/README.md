@@ -33,9 +33,7 @@ Pada method untuk menampilkan Menu Screen menggunakan JOptionPane untuk menampil
 - **Memasukkan Nama Player**<br>
 Ketika *player* diminta untuk memasukkan nama, terdapat implementasi dari `import java.awt.JTextField` dan ketika awal akan di inisialisi kosong dengan adanya sebuah String bernama `player = " ";`. Tidak hanya itu, terdapat implementasi dari import `java.awt.JOptionPane` dimana ketika *player*  sudah memasukkan namanya akan meng-klik OK untuk akan diarahkan selanjutnya.
 - **Pilihan Level**<br>
-Setelah *player* memasukkan namanya, nama tersebut akan di simpan pada sebuah String di dalam class `LeaderBoard` yang akan digunakan untuk menampilkan peringkat 10 teratas. Yang kemudian akan di arahkan untuk memilih *level*, ketika inilah terdapat implementasi JOptionPane. Untuk potongan program-nya dapat di lihat di bawah ini: <br> 
-//pilihan level
-		
+Setelah *player* memasukkan namanya, nama tersebut akan di simpan pada sebuah `Score.txt` di dalam class `LeaderBoard` yang akan digunakan untuk menampilkan peringkat 10 teratas. Yang kemudian akan di arahkan untuk memilih *level*, ketika inilah terdapat implementasi JOptionPane. Untuk potongan program-nya dapat di lihat di bawah ini: <br> 
 		
 	String[] options2 = {"Easy", "Medium", "Hard"} ;
 	// JOptionPane untuk memilih level
@@ -74,7 +72,7 @@ Pada menu Credits Game mengunakan inner class yang merupakan inheritance dari JP
 		setBackground(Color.BLACK);
 		setVisible(true);
 		}`
-   Potongan Program di atas memberikan arti bahwa ketika Menu Credits pada Menu Game di klik maka akan menampilkan Credits Game yang telah di proses sebelumnya. Setelah itu mengatur posisi String yang akan digambar agar di letakkan ditengah-tengah Panel Credits. Terdapat implementasi dari `import java.awat.Graphics` dimana ditunjukkan adanya penamaan paramater pada 	`drawCenteredSwing` dan adanya implementasi dari `import java.awt.Font` dan `import java.awt.FontMetrics` yang dimana di gunakan ketika Parameter Graphics dengan nama graphic mengambil `getFontMetrics` untuk digunakan ketika menampilkan Credits pada Game.
+   Potongan Program di atas memberikan arti bahwa ketika Menu Credits pada Menu Game di klik maka akan menampilkan Credits Game yang telah di proses sebelumnya. Setelah itu mengatur posisi String yang akan digambar agar di letakkan ditengah-tengah Panel Credits. Terdapat implementasi dari `import java.awt.Graphics` dimana ditunjukkan adanya penamaan paramater pada 	`drawCenteredSwing` dan adanya implementasi dari `import java.awt.Font` dan `import java.awt.FontMetrics` yang dimana di gunakan ketika Parameter Graphics dengan nama graphic mengambil `getFontMetrics` untuk digunakan ketika menampilkan Credits pada Game.
 ### LeaderBoard.java
 Pada class `LeaderBoard` menampilkan peringkat-peringkat hasil *Score* yang berupa lama waktu-nya *player*. Semakin cepat seorang *player* itu menyelesaikan semua potongannya maka akan semakin ataslah posisinya. `LeaderBoard` class ini menggunakan JPanel untuk menampilkan peringkat 10 teratas dari semua *player* yang berhasil menyelesaikan potongan-potongan gambar. Terdapat beberapa method yang ada di class `LeaderBoard` ini, yaitu: 
 - **Method untuk meng-setting Panel** <br>
@@ -98,11 +96,11 @@ Selanjutnya, terdapat sebuah method `drawCenteredString` yang digunakan untuk me
   
   Berdasarkan potongan *coding*-an di atas dapat dijelaskan bahwa terdapat sebuah `String` bernama text pada parameter untuk string-string yang akan digambarkan. Selanjutnya, di paramater terdapat sebuah `Font` bernama font yang berguna untuk mengatur jenis font yang akan di tulis dan yang terakhir terdapat sebuah variabel y untuk mengatur posisi string pada sumbu y. <br>  
 ### MyButton.java 
-
+Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbagai action selanjutnya. Dalam class ` MyButton` ini terdapat atribut `lastButton` yang berguna untuk menandakan last button atau bukan. Selain itu, dalam class ini juga terdapat implementasi berupa `MouseAdapter` dan `MouseEvent` yang digunakan untuk memindahkan potongan gambar ke kiri atau ke kanan. 
 ### PuzzleEx.java 
-
+`PuzzleEx` merupakan sebuah class yang berisi untuk mencetak atau menggambar sebuah *puzzle*  yang menggunakan perpanjangan dari JPanel dan menggunakan implementasi `ActionListener`. Pertama terdapat sebuah constructor `PuzzleEx` yang berisi `NUMBER_OF_BUTTONS` yang merupakan potongan gambar berdasarkan level yang dipilih. Method `initUI()` untuk memotong gambar menjadi potongan *puzzle* berukuran kecil. Pada Panel `PuzzleEx` ini juga menampilkan textTime serta *game*-nya. Implementasi `ActionListener` yaitu berupa class MouseHandler dan menggunakan implementasi MouseListener ketika Mouse tersebut di *click* dan di *press*
 ### SaveScore.java 
-
+`SaveScore` digunakan untuk menyimpan Score yang telah di lakukan *player* dengan mengimpelmentasikan `Serializable`. getHighScore string digunakan untuk mengreturn nilai array yang nantinya akan di tampilkan pada Panel `LeaderBoard`
 ### Score.java 
 
 ### ScoreCompare.java 
@@ -112,8 +110,7 @@ Selanjutnya, terdapat sebuah method `drawCenteredString` yang digunakan untuk me
 
 ## Class Diagram 
   Class Diagram yang akan kita gunakan sampai saat ini dapat dilihat: 
-  ![classdiagram](https://github.com/rayhandaffa/FinalProject/blob/main/class%20diagram/class%20diagram%20game.jpg)
-
+  ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram/class%20diagram%20puzzle.mdj)
 ## Link Video Presentasi 
 
 ## Dokumentasi Jalannya Program** <br>
