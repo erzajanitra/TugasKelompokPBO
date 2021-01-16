@@ -23,7 +23,7 @@ Permainan *Puzzle* mungkin sudah tidak asing kita dengar, kata *puzzle* berasal 
 Dalam fitur penampilan diperlukan class bernama `ScoreInput` dan `ScoreOutput` yang dimana dalam class ini akan mengimplementasikan interface Serializable agar objek pada class tersebut dapat menerima input data dan membaca data dengan menggunakan `ObjectInputStream` dan `ObjectOutputStream`.
 
 - **Halaman Credits**<br>
-Pada fitur halaman Credits ini akan menampilkan nama-nama *programmer* dan penjelasan tentang tata cara permainan. Serta, pada fitur halaman Credits juga ditambahkan link http://zetcode.com/javagames/puzzle/ yang dimana link tersebut kami jadikan referensi.
+Pada fitur halaman Credits ini akan menampilkan nama-nama *programmer* dan penjelasan tentang tata cara permainan. Serta, pada fitur halaman Credits juga ditambahkan [Referensi](http://zetcode.com/javagames/puzzle/ )yang dimana link tersebut kami jadikan referensi.
 
 ## Penjelasan Class 
 Terdapat beberapa *class* yang akan digunakan pada projek pembuatan *game* *puzzle* ini, yaitu antara lain: 
