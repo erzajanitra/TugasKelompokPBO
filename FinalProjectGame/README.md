@@ -145,9 +145,9 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
   ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram%20puzzle.jpg)
 ## Link Video Presentasi 
 Jalannya Program dengan menggunakan *Puzzle Game* dapat dilihat pada link berikut: 
-https://youtu.be/4C8Ie7hIv08
+[Demo Final Project Puzzle Game](https://youtu.be/4C8Ie7hIv08)
 ## Dokumentasi Jalannya Program** <br>
-Berikut adalah contoh jalannya program untuk pilihan `Credit Game`:
+Berikut adalah contoh jalannya program untuk pilihan `Credit Game`: <br>
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-credits.gif" width="350" height="300"/>
 
 - **Memainkan Puzzle**<br>
