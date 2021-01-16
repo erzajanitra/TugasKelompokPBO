@@ -145,7 +145,7 @@ Pada class `MyButton` menjelaskan supaya ketika *player* dapat melakukan berbaga
   ![classdiagram](https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/class%20diagram%20puzzle.jpg)
 ## Link Video Presentasi 
 Jalannya Program dengan menggunakan *Puzzle Game* dapat dilihat pada link berikut: 
-[https://youtu.be/4C8Ie7hIv08]()
+https://youtu.be/4C8Ie7hIv08
 ## Dokumentasi Jalannya Program** <br>
 Berikut adalah contoh jalannya program untuk pilihan `Credit Game`:
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/menu-credits.gif" width="350" height="300"/>
@@ -159,6 +159,5 @@ Berikut adalah contoh jalannya program ketika *Player* dapat menyelesaikan Puzzl
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/puzzle-leaderboard.gif" width="350" height="300"/>
 
 - **Ketika Player memilih Quit Game**<br>
-Berikut adalah contoh jalannya program ketika *Player* memilih button Credit:
 <img src= "https://github.com/erzajanitra/TugasKelompokPBO/blob/main/gambar-gambar%20FP/quit%20game.gif" width="450" height="200"/>
 
